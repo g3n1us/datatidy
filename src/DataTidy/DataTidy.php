@@ -1,6 +1,8 @@
 <?php
 	namespace DataTidy;
 	
+	use Illuminate\Http\Response;
+	
 	require(dirname(dirname(__DIR__))."/helpers.php");
 	
 	/**
@@ -19,6 +21,12 @@
 		public function get(){
 			return $this->simple_data($this->endpoint, $this->options);
 		}
+		
+		public function response($type = "json"){
+			$content = $this->simple_data($this->endpoint, $this->options);
+			if($type = "json") $content = $content->toJSON();
+			return Response::create($content);
+		}		
 		
 		public function __toString(){
 			return $this->get()->toJSON();

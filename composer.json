@@ -5,7 +5,8 @@
         "php": "^5.5.0 || ^7.0",
 		"rappasoft/laravel-helpers": "dev-master",
 		"tightenco/collect": "^5.2",
-		"michelf/php-markdown": "^1.6"
+		"michelf/php-markdown": "^1.6",
+		"illuminate/http": "^5.3"
     },
 	"authors": [
 	    {

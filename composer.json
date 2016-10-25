@@ -1,0 +1,22 @@
+{
+    "name": "g3n1us/datatidy",
+    "description": "Get data from Google Sheets or some other sources, and return standardized, structured data",
+    "require": {
+        "php": "^5.5.0 || ^7.0",
+		"rappasoft/laravel-helpers": "dev-master",
+		"tightenco/collect": "^5.2",
+		"michelf/php-markdown": "^1.6"
+    },
+	"authors": [
+	    {
+	        "name": "Sean Bethel",
+	        "email": "sean@americanmadeweb.com",
+	        "homepage": "http://americanmadeweb.com"
+	    }
+	],
+    "autoload": {
+        "psr-4": {
+            "DataTidy\\": "src/DataTidy/"
+        }
+    },	
+}

@@ -17,6 +17,11 @@
 			$this->endpoint = $endpoint;
 			$this->options = $options;
 		}
+		
+		public static function __callStatic($name, $arguments = null){
+			$args = (isset($arguments[1]) && is_array($arguments[1])) ? $arguments[1] : [];
+			return (new DataTidy($arguments[0], $args))->response();
+		}
 	
 		public function get(){
 			return $this->simple_data($this->endpoint, $this->options);
@@ -24,8 +29,8 @@
 		
 		public function response($type = "json"){
 			$content = $this->simple_data($this->endpoint, $this->options);
-			if($type = "json") $content = $content->toJSON();
-			return Response::create($content);
+			$response = new Response;
+			$response->setContent($content)->send();
 		}		
 		
 		public function __toString(){
@@ -51,9 +56,10 @@
 				foreach($defaultoptions as $dkey => $dval) $options[$dkey] = isset($$dkey) ? $$dkey : $dval;
 			}
 			if($options['paginate']) $options['resultsas'] = 'paginate';
+			
 			if(starts_with($url, 'gproxy://')){
 				$key = str_replace('gproxy://', '', $url);
-				$filecontents = gproxy($key, false, 'json');
+				$filecontents = $this->gproxy($key, false, 'json');
 			}
 			else{
 				if(!starts_with($url, 'http')) $url = url($url);
@@ -65,7 +71,7 @@
 				if(!$options['nomd']){
 					foreach($rows as $index => $row){
 						foreach($row as $index2 => $part){
-							$rows[$index][$index2] = selective_md($part);
+							$rows[$index][$index2] = $this->selective_md($part);
 						}
 					}				
 				}
@@ -75,7 +81,7 @@
 				foreach($rows as $index => $row){
 					$rows[$index] = collect([]);
 					foreach(explode("\n\n\n", trim($row)) as $index2 => $part){
-						$rows[$index]->push(selective_md($part));
+						$rows[$index]->push($this->selective_md($part));
 					}
 				}
 			}
@@ -123,7 +129,7 @@
 					
 				while($iterate){
 					$endpoint = "https://spreadsheets.google.com/feeds/list/$key/$currentkeyindex/public/values?alt=json&sheetname=$sheetkey";
-					$json = json_cache($endpoint, 60);  // disabled!!!!
+					$json = $this->json_cache($endpoint, 60);  // disabled!!!!
 					
 					if(empty($json)) {
 						break;
@@ -136,7 +142,6 @@
 					$sheetarraykey = $array['feed']['title']['$t'];
 		
 					$entry = array_get($array['feed'], 'entry', false);
-		
 					if($entry === false){
 						continue;
 					}
@@ -145,9 +150,10 @@
 					$collection = collect($entry);
 					
 					$collection->transform(function ($item) {
-						$array = array_where($item, function ($value) {
-						    return starts_with($value, 'gsx$');
+						$array = array_where($item, function ($value, $key) {
+						    return starts_with($key, 'gsx$');
 						});	
+						
 						$new = [];
 						foreach($array as $k => $v) {
 							$k = str_replace('gsx$', '', $k);
@@ -182,12 +188,12 @@
 		
 		
 		
-		
+
 		
 		private function selective_md(&$string){
 			if(is_array($string)){
 				foreach($string as $k => $v){
-					$string[$k] = selective_md($v);
+					$string[$k] = $this->selective_md($v);
 				}
 				return $string;
 			}

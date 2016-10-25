@@ -103,7 +103,6 @@
 		
 		
 		private function gproxy($key, $sheetkey = 1, $format = 'collection'){
-			// https://spreadsheets.google.com/feeds/list/1azLEgJQ9XqkOsNo5VTDcWok2AIeUute-8Ie0vTRf-L0/1/public/values?alt=json
 		
 			$sheetarray = [];
 				

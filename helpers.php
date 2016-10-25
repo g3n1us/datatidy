@@ -246,7 +246,6 @@ if(!function_exists('json_cache_gsheet_adapter')){
 
 // set $sheetkey to false in order to receive an array of data with sheet names as keys
 function gproxy($key, $sheetkey = 1, $format = 'collection'){
-	// https://spreadsheets.google.com/feeds/list/1azLEgJQ9XqkOsNo5VTDcWok2AIeUute-8Ie0vTRf-L0/1/public/values?alt=json
 
 	$sheetarray = [];
 		

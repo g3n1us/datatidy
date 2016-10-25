@@ -1,5 +1,7 @@
 <?php
-	require(dirname(__DIR__)."/helpers.php");
+	namespace DataTidy;
+	
+	require(dirname(dirname(__DIR__))."/helpers.php");
 	
 	/**
 	* DataTidy
@@ -19,7 +21,7 @@
 		}
 		
 		public function __toString(){
-			return $this->get();
+			return $this->get()->toJSON();
 		}
 		
 		private function simple_data($url, Array $useroptions = []){

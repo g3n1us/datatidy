@@ -1,7 +1,6 @@
 # datatidy
 Get data from Google Sheets other sources, and return standardized, structured, tidy data
 
-
 ## Usage
 
 #### Options

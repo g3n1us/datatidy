@@ -1,7 +1,9 @@
 <?php
+/*
 	if ( !function_exists('str_contains') || !function_exists('collect') || !class_exists('Michelf\Markdown') ){
 		require_once(__DIR__.'/vendor/autoload.php');
 	}
+*/
 		
 
 if(!function_exists('dir_exists')){

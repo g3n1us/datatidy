@@ -1,9 +1,7 @@
 <?php
-	namespace DataTidy;
+	namespace G3n1us;
 	
 	use Illuminate\Http\Response;
-	
-	require(dirname(dirname(__DIR__))."/helpers.php");
 	
 	/**
 	* DataTidy

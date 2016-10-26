@@ -15,8 +15,9 @@
 	],
     "autoload": {
         "psr-4": {
-            "DataTidy\\": "src/"
-        }
+            "G3n1us\\": "src/"
+        },
+        "files": ["helpers.php"]
     },
     "minimum-stability": "dev"
 }

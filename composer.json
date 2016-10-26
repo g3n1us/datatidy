@@ -1,6 +1,6 @@
 {
     "name": "g3n1us/datatidy",
-    "description": "Get data from Google Sheets or some other sources, and return standardized, structured data",
+    "description": "Get data from Google Sheets or other sources, and return standardized, structured, tidy data",
     "require": {
         "php": "^5.5.0 || ^7.0",
 		"michelf/php-markdown": "^1.6",
@@ -9,13 +9,13 @@
 	"authors": [
 	    {
 	        "name": "Sean Bethel",
-	        "email": "sean@americanmadeweb.com",
+	        "email": "tech@americanmadeweb.com",
 	        "homepage": "http://americanmadeweb.com"
 	    }
 	],
     "autoload": {
         "psr-4": {
-            "DataTidy\\": "src/DataTidy/"
+            "DataTidy\\": "src/"
         }
     },
     "minimum-stability": "dev"

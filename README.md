@@ -21,7 +21,7 @@ $defaultoptions = [
 ##### URI or path to retrieve data. 
 To retrieve a Google Sheets spreadsheet, use the format: `gproxy://<spreadsheet-key>`
 
-<span style="background-color: #FFFF00">NOTE: The spreadsheet must be published publicly!</span>
+**NOTE: The spreadsheet must be published publicly!**
 
 For other JSON formatted URIs, specify either a relative or absolute endpoint to retrieve
 

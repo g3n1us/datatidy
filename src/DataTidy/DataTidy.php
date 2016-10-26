@@ -15,21 +15,31 @@
 	
 		public function __construct($endpoint, $options = []){
 			$this->endpoint = $endpoint;
-			$this->options = $options;
+			$this->options = collect($options);
 		}
 		
 		public static function __callStatic($name, $arguments = null){
 			$args = (isset($arguments[1]) && is_array($arguments[1])) ? $arguments[1] : [];
-			return (new DataTidy($arguments[0], $args))->response();
+			$datatidy = new DataTidy($arguments[0], $args);
+			return call_user_func_array([$datatidy, $name], $args);
 		}
-	
-		public function get(){
-			return $this->simple_data($this->endpoint, $this->options);
+
+		public function __call($name, $arguments = null){
+			return call_user_func_array([$this, $name], $arguments);
+		}
+
+
+		// Returns the result of a call to simple_data, by default an instance of Collection, otherwise, an array or JSON
+		protected function get(){
+			return $this->simple_data($this->endpoint, $this->options->toArray());
 		}
 		
-		public function response($type = "json"){
-			$content = $this->simple_data($this->endpoint, $this->options);
+		// Returns a full response using the result of a call to simple_data, by default an instance of Collection, otherwise, an array or JSON		
+		protected function response($type = "json"){
+			$content = $this->simple_data($this->endpoint, $this->options->toArray());
 			$response = new Response;
+			if($this->options->get('allow_origin'))
+				$response->header('Access-Control-Allow-Origin', $this->options->get('allow_origin'));
 			$response->setContent($content)->send();
 		}		
 		

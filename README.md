@@ -16,7 +16,17 @@ $defaultoptions = [
 	'results_per_page' => 12,
 ];
 ```
+### Arguments
+```php
+##### URI or path to retrieve data. 
+To retrieve a Google Sheets spreadsheet, use the format: gproxy://<spreadsheet-key>
+note: The spreadsheet must be published publicly!
 
+For other JSON formatted URIs, specify either a relative or absolute endpoint to retrieve
+
+##### OPTIONS: An array of options as shown above
+
+```
 #### Call via static methods
 ```php
 DataTidy::response("gproxy://1R4ZW6fw7EggY6AsmBtVGWdjny-UYDgv3au6_VarHBMk", ['allow_origin' => '*']);

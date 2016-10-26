@@ -36,6 +36,7 @@
 		protected function response($type = "json"){
 			$content = $this->simple_data($this->endpoint, $this->options->toArray());
 			$response = new Response;
+			$response->setPublic();			
 			if($this->options->get('allow_origin'))
 				$response->header('Access-Control-Allow-Origin', $this->options->get('allow_origin'));
 			$response->setContent($content)->send();

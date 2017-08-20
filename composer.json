@@ -1,6 +1,9 @@
 {
     "name": "g3n1us/datatidy",
     "description": "Get data from Google Sheets or other sources, and return standardized, structured, tidy data",
+    "license": "GPL-3.0",
+    "type": "php",
+	"language": "php",
     "require": {
         "php": "^5.5.0 || ^7.0",
 		"michelf/php-markdown": "^1.6",
